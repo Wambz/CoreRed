@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
+import ProtectedRoute from './components/ProtectedRoute';
 import { CartItem, Product } from './types';
 
 // Pages
@@ -13,8 +15,10 @@ import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import Shop from './pages/Shop';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import NotFound from './pages/NotFound';
-import WriteBlog from './pages/Admin/WriteBlog';
+import AdminCMS from './pages/Admin/CMS';
+import AdminLogin from './pages/Admin/Login';
 import ClauseGuard from './pages/tools/ClauseGuard';
 import Post2Lead from './pages/tools/Post2Lead';
 import ReconcileKE from './pages/tools/ReconcileKE';
@@ -58,35 +62,47 @@ function App() {
   };
 
   return (
-    <Router>
-      <InteractionManager>
-        <CustomCursor />
-        <ScrollBackground />
-        <div className="relative z-[1] bg-black min-h-screen text-gray-200 font-sans selection:bg-red-primary selection:text-white flex flex-col">
-          <Header cartCount={cart.reduce((a, b) => a + b.quantity, 0)} onCartClick={() => setIsCartOpen(true)} />
-          <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onRemove={removeFromCart} />
+    <HelmetProvider>
+      <Router>
+        <InteractionManager>
+          <CustomCursor />
+          <ScrollBackground />
+          <div className="relative z-[1] bg-black min-h-screen text-gray-200 font-sans selection:bg-red-primary selection:text-white flex flex-col">
+            <Header cartCount={cart.reduce((a, b) => a + b.quantity, 0)} onCartClick={() => setIsCartOpen(true)} />
+            <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cart={cart} onRemove={removeFromCart} />
 
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/shop" element={<Shop addToCart={addToCart} />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/admin/write-blog" element={<WriteBlog />} />
-              <Route path="/services/clauseguard" element={<ClauseGuard />} />
-              <Route path="/services/post2lead" element={<Post2Lead />} />
-              <Route path="/services/reconcileke" element={<ReconcileKE />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
+            <main className="flex-grow">
+              <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/shop" element={<Shop addToCart={addToCart} />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
 
-          <Footer />
-        </div>
-      </InteractionManager>
-    </Router>
+                {/* Tool pages */}
+                <Route path="/services/clauseguard" element={<ClauseGuard />} />
+                <Route path="/services/post2lead" element={<Post2Lead />} />
+                <Route path="/services/reconcileke" element={<ReconcileKE />} />
+
+                {/* Admin auth */}
+                <Route path="/admin/login" element={<AdminLogin />} />
+
+                {/* Protected admin */}
+                <Route path="/admin" element={<ProtectedRoute><AdminCMS /></ProtectedRoute>} />
+
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+
+            <Footer />
+          </div>
+        </InteractionManager>
+      </Router>
+    </HelmetProvider>
   );
 }
 

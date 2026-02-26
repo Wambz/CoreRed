@@ -1,4 +1,12 @@
 /* ================================================
+   FONT IMPORTS — must be first in file
+   ================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+
+/* ================================================
    MASTER COLOR PALETTE
    ================================================ */
 :root {
@@ -43,13 +51,7 @@
     --font-code: 'Fira Code', monospace;
 }
 
-/* ================================================
-   FONT IMPORTS
-   ================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+
 
 /* ================================================
    COLOR UTILITY CLASSES
