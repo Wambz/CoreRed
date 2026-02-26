@@ -1,0 +1,759 @@
+/* ================================================
+   MASTER COLOR PALETTE
+   ================================================ */
+:root {
+    --red-primary: #FF0040;
+    --red-bright: #FF1A5E;
+    --red-dark: #CC002F;
+    --red-neon: #FF0052;
+    --red-transparent-30: rgba(255, 0, 64, 0.3);
+    --red-transparent-60: rgba(255, 0, 64, 0.6);
+
+    --cyan-primary: #00FFFF;
+    --cyan-dark: #00CCCC;
+    --cyan-light: #1AFFFF;
+    --cyan-neon: #0AFFFF;
+    --cyan-transparent: rgba(0, 255, 255, 0.4);
+
+    --purple-dark: #1A0033;
+    --purple-mid: #330066;
+    --purple-light: #4D0099;
+    --purple-glow: #6600CC;
+
+    --green-success: #39FF14;
+    --green-dark: #2DD914;
+    --green-neon: #45FF1A;
+
+    --black-primary: #0A0E27;
+    --black-secondary: #0F1429;
+    --black-tertiary: #141B33;
+    --black-card: rgba(10, 14, 39, 0.8);
+
+    --white-primary: #E8E8E8;
+    --white-secondary: #B8B8B8;
+    --white-tertiary: #888888;
+
+    --glow-red: 0 0 20px rgba(255, 0, 64, 0.8), 0 0 40px rgba(255, 0, 64, 0.5);
+    --glow-cyan: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.3);
+    --glow-green: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.3);
+
+    --font-display: 'Orbitron', monospace;
+    --font-secondary: 'Space Mono', monospace;
+    --font-body: 'JetBrains Mono', monospace;
+    --font-code: 'Fira Code', monospace;
+}
+
+/* ================================================
+   FONT IMPORTS
+   ================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+
+/* ================================================
+   COLOR UTILITY CLASSES
+   ================================================ */
+.bg-red-primary {
+    background-color: var(--red-primary) !important;
+}
+
+.bg-cyan-primary {
+    background-color: var(--cyan-primary) !important;
+}
+
+.bg-green-success {
+    background-color: var(--green-success) !important;
+}
+
+.bg-black-primary {
+    background-color: var(--black-primary) !important;
+}
+
+.bg-black-secondary {
+    background-color: var(--black-secondary) !important;
+}
+
+.bg-black-tertiary {
+    background-color: var(--black-tertiary) !important;
+}
+
+.bg-black-card {
+    background-color: var(--black-card) !important;
+}
+
+.bg-purple-dark {
+    background-color: var(--purple-dark) !important;
+}
+
+.text-red-primary {
+    color: var(--red-primary) !important;
+}
+
+.text-cyan-primary {
+    color: var(--cyan-primary) !important;
+}
+
+.text-green-success {
+    color: var(--green-success) !important;
+}
+
+.text-white-primary {
+    color: var(--white-primary) !important;
+}
+
+.text-white-secondary {
+    color: var(--white-secondary) !important;
+}
+
+.text-white-tertiary {
+    color: var(--white-tertiary) !important;
+}
+
+.color-green-success {
+    color: var(--green-success) !important;
+}
+
+.border-red-primary {
+    border-color: var(--red-primary) !important;
+}
+
+.border-cyan-primary {
+    border-color: var(--cyan-primary) !important;
+}
+
+.border-green-success {
+    border-color: var(--green-success) !important;
+}
+
+.border-red-transparent-30 {
+    border-color: var(--red-transparent-30) !important;
+}
+
+.border-cyan-transparent {
+    border-color: var(--cyan-transparent) !important;
+}
+
+.shadow-glow-red {
+    box-shadow: var(--glow-red) !important;
+}
+
+.shadow-glow-cyan {
+    box-shadow: var(--glow-cyan) !important;
+}
+
+.shadow-glow-green {
+    box-shadow: var(--glow-green) !important;
+}
+
+.text-shadow-glow-green {
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
+}
+
+.font-code {
+    font-family: var(--font-code) !important;
+}
+
+.font-display {
+    font-family: var(--font-display) !important;
+}
+
+/* ================================================
+   3D TRANSFORM UTILITIES (ProjectCard flip)
+   ================================================ */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.transform-style-3d {
+    transform-style: preserve-3d;
+}
+
+.backface-hidden {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+
+/* ================================================
+   ANIMATION KEYFRAMES
+   ================================================ */
+@keyframes glitch-1 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes glitch-2 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(2px, -2px);
+    }
+
+    40% {
+        transform: translate(2px, 2px);
+    }
+
+    60% {
+        transform: translate(-2px, -2px);
+    }
+
+    80% {
+        transform: translate(-2px, 2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes scanlines {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes glow-pulse-red {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 0, 64, 0.6), 0 0 40px rgba(255, 0, 64, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(255, 0, 64, 0.9), 0 0 60px rgba(255, 0, 64, 0.6);
+    }
+}
+
+@keyframes glow-pulse-cyan {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), 0 0 60px rgba(0, 255, 255, 0.4);
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-cursor {
+
+    0%,
+    49% {
+        border-right: 2px solid var(--red-primary);
+    }
+
+    50%,
+    100% {
+        border-right: 2px solid transparent;
+    }
+}
+
+@keyframes matrix-fall {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes particle-float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(-20px) translateX(10px);
+    }
+
+    50% {
+        transform: translateY(-40px) translateX(-10px);
+    }
+
+    75% {
+        transform: translateY(-20px) translateX(10px);
+    }
+}
+
+@keyframes border-trace {
+    0% {
+        border-color: var(--red-primary);
+    }
+
+    50% {
+        border-color: var(--cyan-primary);
+        box-shadow: inset 0 0 10px 0 rgba(0, 255, 255, 0.3);
+    }
+
+    100% {
+        border-color: var(--red-primary);
+    }
+}
+
+@keyframes loading-fill {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ================================================
+   ANIMATION UTILITY CLASSES
+   ================================================ */
+.animate-glitch-1 {
+    animation: glitch-1 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.animate-glitch-2 {
+    animation: glitch-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.animate-scanlines {
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 0, 64, 0.03) 2px, rgba(255, 0, 64, 0.03) 4px);
+    animation: scanlines 8s linear infinite;
+}
+
+.scanline-effect {
+    animation: scanlines 8s linear infinite;
+}
+
+.pulse-red {
+    animation: glow-pulse-red 2s ease-in-out infinite;
+}
+
+.pulse-cyan {
+    animation: glow-pulse-cyan 2s ease-in-out infinite;
+}
+
+.float-particle {
+    animation: particle-float 6s ease-in-out infinite;
+}
+
+.matrix-rain {
+    animation: matrix-fall 8s linear infinite;
+}
+
+.border-animate {
+    animation: border-trace 3s ease-in-out infinite;
+}
+
+.bounce-in {
+    animation: bounce-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-loading-fill {
+    animation: loading-fill 2s ease-in-out forwards;
+}
+
+.animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--red-primary);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-cursor 0.75s step-end infinite;
+}
+
+/* ================================================
+   HOVER UTILITY OVERRIDES
+   ================================================ */
+.hover\:border-cyan-primary:hover {
+    border-color: var(--cyan-primary) !important;
+}
+
+.hover\:shadow-glow-cyan:hover {
+    box-shadow: var(--glow-cyan) !important;
+}
+
+.hover\:shadow-glow-red:hover {
+    box-shadow: var(--glow-red) !important;
+}
+
+.hover\:text-cyan-primary:hover {
+    color: var(--cyan-primary) !important;
+}
+
+.hover\:text-red-primary:hover {
+    color: var(--red-primary) !important;
+}
+
+.hover\:border-red-primary:hover {
+    border-color: var(--red-primary) !important;
+}
+
+.hover\:bg-red-primary\/10:hover {
+    background-color: rgba(255, 0, 64, 0.1) !important;
+}
+
+.hover\:bg-cyan-primary\/10:hover {
+    background-color: rgba(0, 255, 255, 0.1) !important;
+}
+
+.hover\:bg-cyan-primary\/5:hover {
+    background-color: rgba(0, 255, 255, 0.05) !important;
+}
+
+/* ================================================
+   SCROLLBAR
+   ================================================ */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: var(--black-secondary);
+}
+
+.scrollbar-thumb-red-primary::-webkit-scrollbar-thumb {
+    background: var(--red-primary);
+    border-radius: 2px;
+}
+
+.scrollbar-thumb-cyan-primary::-webkit-scrollbar-thumb {
+    background: var(--cyan-primary);
+    border-radius: 2px;
+}
+
+/* ================================================
+   GLOBAL STYLES
+   ================================================ */
+body {
+    background: var(--black-primary);
+    color: var(--white-primary);
+    font-family: var(--font-body);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Custom cursor only on devices with a pointer (not mobile) */
+@media (hover: hover) and (pointer: fine) {
+    * {
+        cursor: none !important;
+    }
+
+    input,
+    textarea {
+        cursor: text !important;
+    }
+}
+
+/* Section reveal */
+section.in-view,
+article.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================================
+   LIGHT THEME OVERRIDES (PREMIUM AESTHETIC)
+   ================================================ */
+[data-theme="light"] {
+    /* Backgrounds: Crisp Slate tones */
+    --black-primary: #F8FAFC;
+    /* Slate 50 - Main bg */
+    --black-secondary: #F1F5F9;
+    /* Slate 100 - Alt bg */
+    --black-tertiary: #E2E8F0;
+    /* Slate 200 - Borders/Dividers */
+    --black-card: #FFFFFF;
+    /* Premium pure white for cards */
+
+    /* Typography: High-contrast Slate */
+    --white-primary: #0F172A;
+    /* Slate 900 - Headings */
+    --white-secondary: #334155;
+    /* Slate 700 - Body */
+    --white-tertiary: #64748B;
+    /* Slate 500 - Muted */
+
+    /* Accents: Rose and Teal for elegance */
+    --cyan-primary: #0D9488;
+    /* Teal 600 */
+    --red-primary: #E11D48;
+    /* Rose 600 */
+    --green-success: #059669;
+    /* Emerald 600 */
+
+    /* Transparent accents for backgrounds/hovers */
+    --red-transparent-30: rgba(225, 29, 72, 0.08);
+    /* Very subtle rose */
+    --red-transparent-60: rgba(225, 29, 72, 0.15);
+    --cyan-transparent: rgba(13, 148, 136, 0.15);
+
+    /* Shadows: Soft, diffused, elegant drop-shadows replacing harsh neons */
+    --glow-red: 0 10px 30px -5px rgba(225, 29, 72, 0.15), 0 4px 10px -3px rgba(225, 29, 72, 0.1);
+    --glow-cyan: 0 10px 30px -5px rgba(13, 148, 136, 0.15), 0 4px 10px -3px rgba(13, 148, 136, 0.1);
+    --glow-green: 0 10px 30px -5px rgba(5, 150, 105, 0.15);
+}
+
+/* Light theme body */
+[data-theme="light"] body {
+    background: var(--black-primary);
+    color: var(--white-primary);
+}
+
+/* ---- TYPOGRAPHY OVERRIDES ---- */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+    color: var(--white-primary) !important;
+    text-shadow: none !important;
+    letter-spacing: -0.02em;
+}
+
+[data-theme="light"] p {
+    color: var(--white-secondary) !important;
+}
+
+/* ---- TAILWIND COLOR CLASS OVERRIDES ---- */
+/* Text */
+[data-theme="light"] .text-white {
+    color: var(--white-primary) !important;
+}
+
+[data-theme="light"] .text-gray-100 {
+    color: #1E293B !important;
+}
+
+/* Slate 800 */
+[data-theme="light"] .text-gray-200 {
+    color: var(--white-secondary) !important;
+}
+
+[data-theme="light"] .text-gray-300 {
+    color: #475569 !important;
+}
+
+/* Slate 600 */
+[data-theme="light"] .text-gray-400 {
+    color: var(--white-tertiary) !important;
+}
+
+[data-theme="light"] .text-gray-500 {
+    color: #94A3B8 !important;
+}
+
+/* Slate 400 */
+
+/* Backgrounds */
+[data-theme="light"] .bg-black {
+    background-color: var(--black-primary) !important;
+}
+
+[data-theme="light"] .bg-black\/95 {
+    background-color: rgba(248, 250, 252, 0.95) !important;
+}
+
+[data-theme="light"] .bg-gray-800 {
+    background-color: var(--black-secondary) !important;
+}
+
+[data-theme="light"] .bg-gray-900 {
+    background-color: var(--black-primary) !important;
+}
+
+[data-theme="light"] .bg-dark-900 {
+    background-color: var(--black-primary) !important;
+}
+
+[data-theme="light"] .bg-dark-800 {
+    background-color: var(--black-card) !important;
+}
+
+[data-theme="light"] .bg-dark-700 {
+    background-color: var(--black-tertiary) !important;
+}
+
+/* Borders */
+[data-theme="light"] .border-gray-700,
+[data-theme="light"] .border-gray-800 {
+    border-color: var(--black-tertiary) !important;
+}
+
+/* Selection */
+[data-theme="light"] ::selection {
+    background: rgba(225, 29, 72, 0.15);
+    color: var(--white-primary);
+}
+
+/* ---- NAV / HEADER ---- */
+[data-theme="light"] nav {
+    background: rgba(255, 255, 255, 0.9) !important;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-color: var(--black-tertiary) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] nav a {
+    color: var(--white-secondary) !important;
+}
+
+[data-theme="light"] nav a:hover {
+    color: var(--white-primary) !important;
+}
+
+[data-theme="light"] nav .text-codered-500 {
+    color: var(--red-primary) !important;
+}
+
+/* ---- HERO SECTION ---- */
+[data-theme="light"] .hero-container {
+    background: var(--black-primary) !important;
+}
+
+[data-theme="light"] .hero-title {
+    color: var(--white-primary) !important;
+    text-shadow: none !important;
+}
+
+/* ---- FOOTER ---- */
+[data-theme="light"] footer {
+    background: #FFFFFF !important;
+    border-top: 1px solid var(--black-tertiary);
+    color: var(--white-secondary) !important;
+}
+
+[data-theme="light"] footer a {
+    color: #475569 !important;
+}
+
+[data-theme="light"] footer a:hover {
+    color: var(--red-primary) !important;
+}
+
+/* ---- CARDS ---- */
+/* Give Project Cards a soft, elegant floating effect in light mode */
+[data-theme="light"] .project-card .backface-hidden {
+    background-color: #FFFFFF !important;
+    border: 1px solid var(--black-tertiary) !important;
+    /* Soft border instead of red/cyan border */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01) !important;
+    transition: all 0.4s ease !important;
+}
+
+[data-theme="light"] .project-card:hover .backface-hidden {
+    border-color: var(--red-transparent-60) !important;
+    box-shadow: var(--glow-red) !important;
+}
+
+/* ---- CODERED BRAND TEXT ---- */
+[data-theme="light"] .text-codered-500 {
+    color: var(--red-primary) !important;
+}
+
+[data-theme="light"] .bg-codered-500 {
+    background-color: var(--red-primary) !important;
+}
+
+[data-theme="light"] .hover\:bg-codered-600:hover {
+    background-color: #BE123C !important;
+}
+
+/* Rose 700 */
+
+/* ---- LOGO ADJUSTMENT ---- */
+[data-theme="light"] .brand-logo-text {
+    color: var(--white-primary);
+}
+
+/* ---- MISC SHADOWS ---- */
+[data-theme="light"] .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08) !important;
+}

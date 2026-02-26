@@ -1,67 +1,138 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Derrick Ndaire | CodeRed Tech Solutions</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              codered: {
-                500: '#DC143C', // Crimson
-                600: '#B90E31',
-              },
-              dark: {
-                900: '#0a0a0a',
-                800: '#1a1a1a',
-                700: '#2a2a2a',
-              }
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Derrick Ndaire | CodeRed Innovations - IT & Web Solutions</title>
+  <meta name="description"
+    content="Derrick Ndaire — IT Specialist & Web Developer in Nairobi, Kenya. Expert in IT infrastructure, network security, web applications, and AI automation. 8+ years experience." />
+  <meta name="theme-color" content="#DC143C" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Security Headers (via meta tags) -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Derrick Ndaire | CodeRed Innovations" />
+  <meta property="og:description"
+    content="IT Specialist & Web Developer — Expert in infrastructure, security, and AI automation in Nairobi, Kenya." />
+  <meta property="og:image" content="/logo.jpg" />
+  <meta property="og:url" content="https://corered.co.ke/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Analytics (GA4) — Replace G-XXXXXXXXXX with your actual ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7098399960610106"
+    crossorigin="anonymous"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts with preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@400;700;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            codered: {
+              500: '#DC143C',
+              600: '#B90E31',
             },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              heading: ['Montserrat', 'sans-serif'],
-            },
-            animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-            },
-            keyframes: {
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              }
+            dark: {
+              900: '#0a0a0a',
+              800: '#1a1a1a',
+              700: '#2a2a2a',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
             }
           }
         }
       }
-    </script>
-    <style>
-      body {
-        background-color: #000000;
-        color: #ffffff;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1a1a1a; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #DC143C; 
-        border-radius: 5px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #b90e31; 
-      }
-    </style>
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #DC143C;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #b90e31;
+    }
+
+    /* Focus ring for accessibility */
+    *:focus-visible {
+      outline: 2px solid #DC143C;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* Skip to content link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #DC143C;
+      color: white;
+      padding: 8px 16px;
+      font-weight: bold;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
+
+  <!-- Import Map -->
   <script type="importmap">
 {
   "imports": {
@@ -72,12 +143,38 @@
     "recharts": "https://aistudiocdn.com/recharts@^3.5.0"
   }
 }
-</script>
-<link rel="stylesheet" href="/index.css">
+  </script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Derrick Ndaire",
+    "jobTitle": "IT Specialist & Web Developer",
+    "url": "https://corered.co.ke",
+    "sameAs": [
+      "https://www.linkedin.com/in/derrick-ndaire-8549a8107/",
+      "https://github.com/Wambz"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Nairobi",
+      "addressCountry": "KE"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "CodeRed Innovations"
+    },
+    "knowsAbout": ["IT Infrastructure", "Network Security", "Web Development", "AI Automation", "SQL Server"]
+  }
+  </script>
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
-  <script type="module" src="/index.tsx"></script>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
 </body>
+
 </html>

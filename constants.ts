@@ -6,7 +6,7 @@ export const SERVICES: Service[] = [
     id: 1,
     tier: "TIER 1",
     title: "BASIC IT SUPPORT",
-    price: "KES 15,000",
+    price: "$115",
     features: [
       "Remote technical support (Business Hours)",
       "Software troubleshooting",
@@ -20,7 +20,7 @@ export const SERVICES: Service[] = [
     id: 2,
     tier: "TIER 2",
     title: "PROFESSIONAL IT MANAGEMENT",
-    price: "KES 35,000",
+    price: "$270",
     recommended: true,
     features: [
       "Everything in Basic",
@@ -37,7 +37,7 @@ export const SERVICES: Service[] = [
     id: 3,
     tier: "TIER 3",
     title: "ENTERPRISE IT SOLUTIONS",
-    price: "KES 75,000",
+    price: "$575",
     features: [
       "Everything in Professional",
       "Unlimited on-site support",
@@ -56,55 +56,55 @@ export const PRODUCTS: Product[] = [
     id: 1,
     name: "Dell XPS 15 Professional",
     category: "Laptops",
-    price: 135000,
+    price: 1040,
     specs: ["11th Gen Intel Core i7", "16GB RAM", "512GB SSD", "15.6\" FHD Display"],
     rating: 4.8,
-    image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80"
+    image: "/product-dell-xps.png"
   },
   {
     id: 2,
     name: "HP EliteBook 840 G8",
     category: "Laptops",
-    price: 95000,
+    price: 730,
     specs: ["Intel Core i5-1135G7", "8GB RAM", "256GB SSD", "14\" Display"],
     rating: 4.5,
-    image: "https://images.unsplash.com/photo-1544731612-de7f96afe55f?auto=format&fit=crop&w=800&q=80"
+    image: "/product-hp-elitebook.png"
   },
   {
     id: 3,
     name: "Cisco Catalyst 2960 Switch",
     category: "Networking",
-    price: 45000,
+    price: 345,
     specs: ["24-Port Managed", "Gigabit Ethernet", "Layer 2"],
     rating: 4.9,
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bbc7c?auto=format&fit=crop&w=800&q=80"
+    image: "/cisco_switch.jpg"
   },
   {
     id: 4,
     name: "TP-Link Archer AX73",
     category: "Networking",
-    price: 18500,
+    price: 145,
     specs: ["WiFi 6 (AX5400)", "Dual-band", "Gigabit Ports"],
     rating: 4.6,
-    image: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?auto=format&fit=crop&w=800&q=80"
+    image: "/product-tp-link.png"
   },
   {
     id: 5,
     name: "Logitech MX Master 3S",
     category: "Accessories",
-    price: 8500,
+    price: 65,
     specs: ["Wireless", "Ergonomic", "8K DPI Sensor"],
     rating: 4.9,
-    image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=800&q=80"
+    image: "/product-logitech.png"
   },
   {
     id: 6,
     name: "Synology DS220+ NAS",
     category: "Storage",
-    price: 55000,
+    price: 425,
     specs: ["2-Bay", "Intel Celeron J4025", "2GB DDR4"],
     rating: 4.8,
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
+    image: "/product-synology.png"
   }
 ];
 
