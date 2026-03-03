@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../config/supabase';
 import SEOHead from '../../components/SEOHead';
 import { Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
@@ -9,19 +10,25 @@ const AdminLogin: React.FC = () => {
     const [showPw, setShowPw] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
-        const { error: authErr } = await supabase.auth.signInWithPassword({ email, password });
+        try {
+            const { data, error: authErr } = await supabase.auth.signInWithPassword({ email, password });
 
-        if (authErr) {
-            setError(authErr.message);
+            if (authErr) throw authErr;
+
+            if (data.session) {
+                navigate('/admin');
+            }
+        } catch (err: any) {
+            setError(err.message || 'Failed to sign in');
             setLoading(false);
         }
-        // On success, ProtectedRoute will detect the session change and redirect automatically
     };
 
     return (

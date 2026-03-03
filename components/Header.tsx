@@ -40,6 +40,11 @@ const Header: React.FC<HeaderProps> = ({ cartCount, onCartClick }) => {
     return location.pathname.startsWith(path);
   };
 
+  // Do not render the public site header on admin pages since CMS has its own header.
+  if (location.pathname.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <nav
       role="navigation"

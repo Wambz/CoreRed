@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { supabase, getAllArticles, upsertArticle, deleteArticle, slugify, type Article, type FAQ } from '../../config/supabase';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../config/firebase';
+
 import SEOHead from '../../components/SEOHead';
 import {
     PlusCircle, Trash2, Edit3, Eye, EyeOff, Send, LogOut,
-    Image, X, ChevronDown, ChevronUp, Loader2, CheckCircle2, AlertCircle, Save
+    Image, X, ChevronDown, ChevronUp, Loader2, CheckCircle2, AlertCircle, Save, Copy
 } from 'lucide-react';
 
 type ViewMode = 'list' | 'editor';
@@ -122,24 +121,36 @@ function CoverImageUpload({ value, onChange }: { value: string | null; onChange:
     const [uploading, setUploading] = useState(false);
     const [progress, setProgress] = useState(0);
 
-    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
         setUploading(true);
-        const storageRef = ref(storage, `blog-covers/${Date.now()}-${file.name}`);
-        const task = uploadBytesResumable(storageRef, file);
+        setProgress(30); // Fake progress
 
-        task.on('state_changed',
-            snap => setProgress(Math.round((snap.bytesTransferred / snap.totalBytes) * 100)),
-            err => { console.error(err); setUploading(false); },
-            async () => {
-                const url = await getDownloadURL(task.snapshot.ref);
-                onChange(url);
-                setUploading(false);
-                setProgress(0);
+        try {
+            const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+            const { data, error } = await supabase.storage
+                .from('blog-covers')
+                .upload(fileName, file);
+
+            if (error) throw error;
+            setProgress(70);
+
+            if (data) {
+                const { data: publicUrlData } = supabase.storage
+                    .from('blog-covers')
+                    .getPublicUrl(data.path);
+
+                onChange(publicUrlData.publicUrl);
             }
-        );
+        } catch (err) {
+            console.error('Upload error:', err);
+            alert('Upload failed: ' + (err as Error).message);
+        } finally {
+            setUploading(false);
+            setProgress(0);
+        }
     };
 
     return (
@@ -169,6 +180,103 @@ function CoverImageUpload({ value, onChange }: { value: string | null; onChange:
                         </div>
                     )}
                 </label>
+            )}
+        </div>
+    );
+}
+
+// ─── Content Image Upload (Multiple images for embedding) ───────────────────
+function ContentImageUpload({ onInsert }: { onInsert: (markdown: string) => void }) {
+    const [uploading, setUploading] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+    const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploading(true);
+        setProgress(30);
+
+        try {
+            const fileName = `${Date.now()}-content-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+            const { data, error } = await supabase.storage
+                .from('blog-covers')
+                .upload(fileName, file);
+
+            if (error) throw error;
+            setProgress(70);
+
+            if (data) {
+                const { data: publicUrlData } = supabase.storage
+                    .from('blog-covers')
+                    .getPublicUrl(data.path);
+
+                setUploadedImages(prev => [publicUrlData.publicUrl, ...prev]);
+                // Automatically insert into the editor body!
+                onInsert(`\n\n![Image](${publicUrlData.publicUrl})\n\n`);
+            }
+        } catch (err) {
+            console.error('Upload error:', err);
+            alert('Upload failed: ' + (err as Error).message);
+        } finally {
+            setUploading(false);
+            setProgress(0);
+        }
+    };
+
+    const copyMarkdown = async (url: string, index: number) => {
+        const markdown = `\n\n![Image](${url})\n\n`;
+        try {
+            await navigator.clipboard.writeText(markdown);
+            setCopiedIndex(index);
+            setTimeout(() => setCopiedIndex(null), 2000);
+        } catch (err) {
+            console.error('Clipboard copy failed:', err);
+            // Fallback for browsers/environments blocking clipboard API
+            prompt('Copy your image markdown below:', markdown);
+        }
+    };
+
+    return (
+        <div className="mt-6 border-t border-gray-800 pt-5">
+            <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">
+                Article Images (Embed)
+            </label>
+            <p className="text-[10px] text-gray-500 mb-3 leading-snug">
+                Images uploaded here will be automatically added to the bottom of the article. You can also manually copy and paste the Markdown anywhere in the body.
+            </p>
+
+            <label className="flex flex-col items-center justify-center border border-dashed border-gray-700 rounded-lg py-3 cursor-pointer hover:border-codered-500 transition-colors mb-4">
+                <span className="text-gray-500 text-xs font-bold">
+                    {uploading ? `Uploading... ${progress}%` : '+ Upload Content Image'}
+                </span>
+                <input type="file" accept="image/*" onChange={handleFile} className="hidden" disabled={uploading} />
+            </label>
+
+            {uploadedImages.length > 0 && (
+                <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                    {uploadedImages.map((url, i) => (
+                        <div key={url} className="flex items-center gap-2 bg-[#0a0a0a] border border-gray-800 p-2 rounded-lg group">
+                            <img src={url} alt="Uploaded content" className="w-8 h-8 rounded object-cover border border-gray-800" />
+                            <div className="flex-1 min-w-0">
+                                <p className="text-[10px] text-gray-500 truncate">{url.split('/').pop()}</p>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => copyMarkdown(url, i)}
+                                className={`p-1.5 rounded transition-colors flex-shrink-0 ${copiedIndex === i
+                                    ? 'bg-green-500/20 text-green-400'
+                                    : 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700'
+                                    }`}
+                                title="Copy Markdown Embed Link"
+                            >
+                                {copiedIndex === i ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                            </button>
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
     );
@@ -376,8 +484,8 @@ const AdminCMS: React.FC = () => {
 
                                             {/* Status badge */}
                                             <span className={`text-xs px-2 py-0.5 rounded-full font-bold flex-shrink-0 ${article.published
-                                                    ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                                                    : 'bg-gray-800 text-gray-500'
+                                                ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                                                : 'bg-gray-800 text-gray-500'
                                                 }`}>
                                                 {article.published ? 'Published' : 'Draft'}
                                             </span>
@@ -432,8 +540,8 @@ const AdminCMS: React.FC = () => {
                             {/* Status alert */}
                             {status.type !== 'idle' && (
                                 <div className={`flex items-center gap-2 px-4 py-3 rounded-lg text-sm ${status.type === 'success'
-                                        ? 'bg-green-500/10 border border-green-500/30 text-green-400'
-                                        : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                                    ? 'bg-green-500/10 border border-green-500/30 text-green-400'
+                                    : 'bg-red-500/10 border border-red-500/30 text-red-400'
                                     }`}>
                                     {status.type === 'success'
                                         ? <CheckCircle2 className="w-4 h-4" />
@@ -524,8 +632,8 @@ const AdminCMS: React.FC = () => {
                                     <div className="mt-4 pt-4 border-t border-gray-800">
                                         <p className="text-xs text-gray-600 mb-2">Current status</p>
                                         <span className={`text-xs font-bold px-2 py-1 rounded-full ${editingArticle.published
-                                                ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                                                : 'bg-gray-800 text-gray-500'
+                                            ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                                            : 'bg-gray-800 text-gray-500'
                                             }`}>
                                             {editingArticle.published ? '✓ Published' : 'Draft'}
                                         </span>
@@ -533,11 +641,19 @@ const AdminCMS: React.FC = () => {
                                 )}
                             </div>
 
-                            {/* Cover image */}
+                            {/* Cover image & Content Images */}
                             <div className="bg-[#0d0d0d] border border-gray-800 rounded-xl p-5">
                                 <CoverImageUpload
                                     value={editingArticle.cover_image_url ?? null}
                                     onChange={url => setEditingArticle(prev => ({ ...prev, cover_image_url: url }))}
+                                />
+                                <ContentImageUpload
+                                    onInsert={(markdown) => {
+                                        setEditingArticle(prev => ({
+                                            ...prev,
+                                            body: (prev.body || '') + markdown
+                                        }));
+                                    }}
                                 />
                             </div>
 

@@ -1,11 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
 
 const Footer: React.FC = () => {
+    const location = useLocation();
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    // Do not render the public site footer on admin pages
+    if (location.pathname.startsWith('/admin')) {
+        return null;
+    }
 
     return (
         <footer className="bg-black pt-16 border-t border-gray-800" role="contentinfo">
@@ -69,8 +76,9 @@ const Footer: React.FC = () => {
                 </div>
             </div>
             <div className="border-t border-gray-900 bg-dark-900 py-6">
-                <div className="container mx-auto px-6 text-center text-xs text-gray-600">
+                <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
                     <p>&copy; 2025 CodeRed Innovations - Derrick Ndaire. All Rights Reserved.</p>
+                    <Link to="/admin" className="mt-2 md:mt-0 hover:text-codered-500 transition-colors">Admin Dashboard</Link>
                 </div>
             </div>
         </footer>
